@@ -21,6 +21,8 @@ In this project, a simple webpage was created using HTML. This webpage presented
 
 An important feature of the webpage is its ability to identify the operating system of the user's machine. This allows the malicious code to be tailored to the specific system, increasing the likelihood of successful exploitation. For the purposes of this project, the target system was chosen to be Windows.
 
+Before the attack, the Apache2 service on the Kali Linux system was started using the command `sudo service apache2 start`. This made the webpage accessible to the victim's machine.
+
 The process can be broken down into the following steps:
 
 1. **Creating the Webpage**: A simple webpage was created with a block of seemingly innocuous code that users are prompted to copy. This could be presented as a solution to a common problem, enticing users to copy the code.
