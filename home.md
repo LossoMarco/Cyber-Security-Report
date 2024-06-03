@@ -29,7 +29,7 @@ The process can be broken down into the following steps:
 
 4. **Spawning the Reverse Shell**: The malicious code opens a reverse shell, providing a backdoor into the user's system.
 
-(Note: Insert screenshot of the webpage here)
+![Web Page](images/Web_Page.png)
 
 (Note: Insert code snippet of the JavaScript used for pastejacking here)
 
