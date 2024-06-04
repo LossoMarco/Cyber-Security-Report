@@ -12,6 +12,7 @@ Further, the reverse shell was leveraged to download a keylogger onto the victim
 
 This report aims to provide a detailed walkthrough of these processes, shedding light on the intricacies of these techniques.
 
+**NB** All the files are uploaded in this repository, no need to copy and paste the content of this page
 
 ## Pastejacking
 
