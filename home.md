@@ -99,7 +99,9 @@ Where:
 - `$stream.Flush()`: This line clears the network stream to ensure that all data has been sent.
 - `$client.Close()`: This line closes the TCP client.
 
-
+Below are shown the victim and the attacker machines after the spawn of the reverse shell.
+![Windows Reverse Shell](images/Win_RS.png)
+![Kali Reverse Shell](images/Kali_RS.png)
 
 ## Persistence
 
@@ -153,7 +155,7 @@ Finally, to further conceal the presence of these scripts on the victim's machin
 
 ## Keylogger
 
-In this project, a keylogger was implemented using a C program, which was converted manually from an original C++ program found on the internet at this link: [Key-Logger ++](https://github.com/chi-wei-lien/key-logger/blob/main/keylogger.cpp). The conversion was necessary due to some missing libraries in Windows Server 2008, in modern operating systems the C++ runs correctly.
+In this project, a keylogger was implemented using a C program, which was converted manually from an original C++ program found on the internet at this link: [Key-Logger C++](https://github.com/chi-wei-lien/key-logger/blob/main/keylogger.cpp). The conversion was necessary due to some missing libraries in Windows Server 2008, in modern operating systems the C++ runs correctly.
 
 The keylogger records all the keystrokes and saves them in a file named "log.txt". 
 
