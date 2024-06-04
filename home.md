@@ -106,7 +106,7 @@ Below are shown the victim and the attacker machines after the spawn of the reve
 
 ## Persistence
 
-Persistence in a cybersecurity context refers to the ability of an attacker to maintain access to a compromised system, even after the system has been rebooted, or the initial attack vector has been closed. In this project, persistence was achieved by uploading two files, "Persistence.ps1" and "persistence.vbs", to the same location as the webpage used for pastejacking.
+Persistence refers to the ability of an attacker to maintain access to a compromised system, even after the system has been rebooted, or the initial attack vector has been closed. In this project, persistence was achieved with two files, "Persistence.ps1" and "persistence.vbs".
 
 1. **Persistence.ps1**: This file contains the same code as the reverse shell. When this script is run on the victim's machine, it spawns a reverse shell that connects back to the attacker's machine.
 
