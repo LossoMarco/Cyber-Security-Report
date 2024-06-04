@@ -27,7 +27,7 @@ The process can be broken down into the following steps:
 
 1. **Creating the Webpage**: A simple webpage was created with a block of seemingly innocuous code that users are prompted to copy. This could be presented as a solution to a common problem, enticing users to copy the code.
 
-![Web Page](images/Web_Page.png)
+![Web Page](images/Web_Page_Win.png)
 
 2. **Implementing Pastejacking**: Through the use of JavaScript, the actual content that gets copied is manipulated. When users copy the code, additional malicious code is appended or prepended. In this case, the additional code spawns a reverse shell when pasted into the terminal.
 
