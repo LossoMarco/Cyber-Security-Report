@@ -184,8 +184,10 @@ Below are shown the results of the previous operations, on the left there are th
 Note that the command that marks the files as hidden is not executed in the screenshot to get a better representation of the results.
 
 ## Results
-In this section the victim machine is restarted to see that the persistance was actually gained. In Kali are executed two terminal windows: one that runs netcat as in the firsts steps of this project `nc -lvp 4444 -n`; on the other runs the program `Server_Key_Logger` that waits for a tcp connection. Below are shown the results at the
-(Note: Insert code snippet of the keylogger, client, and server programs here)
+In this section the victim machine is restarted to see that the persistance was actually gained. In Kali are executed two terminal windows: one that runs netcat as in the firsts steps of this project `nc -lvp 4444 -n`; on the other runs the program `Server_Key_Logger` that waits for a tcp connection. Below are shown the results in Kali.
+On the right there is the reverse shell, on the top left the `Server_Key_Logger` was launched and the tcp connection has been closed because the content of the keylogger has been obtained; and in the bottom right there is the content of the keylogger in the output file. In this simple example is easy to see that the victim performed a research on amazon inserting sensible content like password and card numbers.
+
+![Results](images/Results.png)
 
 ## Conclusion
 
