@@ -189,13 +189,10 @@ On the right there is the reverse shell, on the top left the `Server_Key_Logger`
 
 ![Results](images/Results.png)
 
-## Conclusion
+## Conclusion and improvements
 
 This project has provided a comprehensive exploration of several cybersecurity techniques, including pastejacking, reverse shell exploitation, persistence, and keylogging. Each of these techniques represents a potential threat that can be used by attackers to gain unauthorized access to systems, execute malicious commands, maintain persistent access, and gather sensitive information.
 
-The demonstration was conducted in a controlled and safe environment, strictly for educational purposes. It serves as a reminder of the potential dangers of executing untrusted code, visiting unverified websites, and the importance of maintaining robust security measures to protect against such threats.
+The demonstration was conducted in a controlled and safe environment, strictly for educational purposes.
 
-Through understanding these techniques, it is hoped that better preparation can be made to prevent such intrusions and safeguard digital environments. It is important to remember that these techniques should only be used ethically and legally. Misuse of such techniques can lead to severe consequences.
-
-The project also highlights the importance of continuous learning and staying updated in the field of cybersecurity, given the rapidly evolving nature of cyber threats. It is hoped that this knowledge will contribute to the development of more secure systems and the safe use of digital resources.
 
