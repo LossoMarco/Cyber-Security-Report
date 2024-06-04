@@ -111,7 +111,7 @@ Persistence refers to the ability of an attacker to maintain access to a comprom
 
 1. **Persistence.ps1**: This file contains the same code as the reverse shell. When this script is run on the victim's machine, it spawns a reverse shell that connects back to the attacker's machine.
 
-2. **persistence.vbs**: This file is a VBScript that is used to run the "Persistence.ps1" script in the background. Running the script in the background makes it less likely for the victim to notice the malicious process, as it won't appear in the foreground or affect the use of the system.
+2. **Persistence.vbs**: This file is a VBScript that is used to run the "Persistence.ps1" script in the background. Running the script in the background makes it less likely for the victim to notice the malicious process, as it won't appear in the foreground or affect the use of the system.
 
 The process can be broken down into the following steps:
 
