@@ -199,6 +199,9 @@ On the right there is the reverse shell, on the top left the `Server_Key_Logger`
 
 ![Results](images/Results.png)
 
+Please note that there was an instance where the content of the `log.txt` file differed from what was typed on the keyboard, specifically some letters were reversed. This can be seen in [this YouTube video](https://www.youtube.com/watch?v=8WwnBSi-c6M&t=605s) at minute 9.55, the video also shows step by step all the passages presented in this page. 
+A simple precaution to prevent this from happening is to try to keep the RAM as free as possible during the playback of the demo.
+
 ## Conclusion
 
 This project has provided a comprehensive exploration of several cybersecurity techniques, including pastejacking, reverse shell exploitation, persistence, and keylogging. Each of these techniques represents a potential threat that can be used by attackers to gain unauthorized access to systems, execute malicious commands, maintain persistent access, and gather sensitive information.
